@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block head%}
+<title>Edit Profile - WebbForms</title>
+{%endblock%}
+
+
+{% block body %}
+<div class="content-container">
+    <div class="formcontainer">
+        <h2>Add/Edit your profile details</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="nameInput">
+                <div><label for="fname">First name</label><input required type="text" name="fname" id="lname" value="{{user.first_name}}"></div>
+                <div><label for="lname">Last name</label> <input required type="text" name="lname" id="lname" value="{{user.last_name}}"> </div>
+            </div>
+            <div class="emailInput">
+                <label for="email">Email</label>
+                <input required type="email" name="email" id="email" value="{{user.email}}">
+            </div>
+
+            <button class="btn btn-outline-dark">Submit</button>
+        </form>
+        <div style="text-align: center; margin-top: 55px;"><a href="{%url 'resetPass'%}"><button class="btn btn-dark">Reset Password</button></a></div>
+    </div>
+</div>
+{%endblock%}

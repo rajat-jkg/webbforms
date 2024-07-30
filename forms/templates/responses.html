@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block head%}
+<title>Form Entries | {{formName}}</title>
+<script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+{%endblock%}
+
+
+{%block body%}
+<div class="content-container">
+    <h2>{{formName}}</h2>
+    <div class="row">
+        {%for time, respnose,id in responses%}
+        <div class="col-md-6" id="respose-{{id}}">
+            <div class="bg-dark text-light border border-secondary rounded m-1 p-3">
+                <b>{{time}} IST(Asia/Kolkata)</b> <br>
+                {%for key,values in respnose%}
+                {{key}}: {%for value in values%}{{value}} {%endfor%} <br>
+                {%endfor%}
+              <button class="btn btn-sm btn-outline-danger" hx-get="/forms/deleteresponse/{{id}}" hx-trigger="click" hx-target="#respose-{{id}}" hx-swap="delete" hx-confirm="Are you sure you want to delete this entry?">Delete</button>
+            </div>
+        </div>
+        {%empty%}
+        <p>No form entry yet</p>
+        {%endfor%}
+    </div>
+</div>
+{%endblock%}

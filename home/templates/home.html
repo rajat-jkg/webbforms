@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+<title>WebbForms - Home</title>
+{%endblock%}
+
+{%block body%}
+<div class="bg-dark border border-secondary text-light">
+    <div class="content-container hero-section">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center"> 
+                <h1>WebbForms</h1>
+                <h2>Forms for all your needs</h2>
+                <div>
+                    <a href="#know-more-target"><button class="btn btn-outline-light">Know More</button></a>
+                    <a href="{%if user.is_authenticated%}{%url 'profile'%}{%else%}{%url 'register'%}{%endif%}" ><button class="btn btn-outline-light">Get Started</button></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12"><img src="{%static 'images/home/hero-image.png'%}" alt="WebbForms Hero Image" title="WebbForms credit: Sotory set" class="img-fluid"></div>
+        </div>
+    </div>
+</div>
+
+<div class="border border-secondary" id="know-more-target">
+    <div class="content-container applications-section">
+        <h2>Forms for everything</h2>
+        <div class="row">
+            <div class="col-md-3 col-sm-6"><div class="bg-dark rounded border border-secondary text-light m-1 p-2">
+                <img src="{%static 'images/home/registration.png' %}" alt="Resitrations" class="uses-image">
+                <div class="uses-text">Resitrations</div>
+            </div></div>
+            <div class="col-md-3 col-sm-6"><div class="bg-dark rounded border border-secondary text-light m-1 p-2">
+                <img src="{%static 'images/home/feedbacks.png' %}" alt="feedbacks" class="uses-image">
+                <div class="uses-text">Feedbacks</div>
+            </div></div>
+            <div class="col-md-3 col-sm-6"><div class="bg-dark rounded border border-secondary text-light m-1 p-2">
+                <img src="{%static 'images/home/survey.png' %}" alt="Surveys" class="uses-image">
+                <div class="uses-text">Surveys</div>
+            </div></div>
+            <div class="col-md-3 col-sm-6"><div class="bg-dark rounded border border-secondary text-light m-1 p-2">
+                <img src="{%static 'images/home/signup.png' %}" alt="Sign Up" class="uses-image">
+                <div class="uses-text">Newsletter Signups</div>
+            </div></div>
+        </div>
+    </div>
+</div>
+<div class="bg-dark border border-secondary text-light web-features">
+    <div class="content-container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static 'images/home/web-browsing.png'%}" alt="Web Browsing" class="img-fluid">
+            </div>
+            <div class="col-md-6 d-flex flex-column justify-content-center aligner">
+                <h2>Power any website with WebbForms</h2>
+                <h3>Embed in any website</h3>
+                <a href="{%if user.is_authenticated%}{%url 'profile'%}{%else%}{%url 'register'%}{%endif%}"><button class="btn btn-outline-light">Start Now</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

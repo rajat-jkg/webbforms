@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+
+{%block head%}
+<title>Reset Password</title>
+{%endblock%}
+
+
+{% block body %}
+<div class="content-container">
+ <div class="formcontainer">
+    <form method="post">
+        {% csrf_token %}
+        <label for="oldpass">Old password</label>
+        <input type="password" id="oldpass" name="oldpass" required />
+        <label for="pass">New Password</label>
+        <input type="password" id="pass" name="pass" required />
+        <label for="pass2">Confirm Password</label>
+        <input type="password" name="pass2" id="pass2" required />
+        <ul>
+            <li>Username cannot contain space</li>
+            <li>Password should be at least 8 characters</li>
+            <li>Password should contain at least one english alhabet</li>
+            <li>Password should contain at least one numeric character</li>
+        </ul>
+        <button class="btn btn-outline-dark" type="button" onclick="validateForm()" >Submit</button>
+
+        {%if error%}
+        <p style="color: red">{{error}}</p>
+        {%endif%}
+    </form>
+ </div>
+</div>
+
+<script>
+    function validateForm(){
+        var pass1 = document.getElementById('pass').value;
+        var pass2 = document.getElementById('pass2').value;
+
+        if(/\d/.test(pass1) && /[a-zA-Z]/.test(pass1) && pass1.length >= 8){
+            if(pass1!==pass2){
+                alert('Passwords do not match');
+                return;
+            }
+            else{
+                document.querySelector('form').submit();
+            }
+        }
+        else alert('Weak password');
+    }
+</script>
+{%endblock%}

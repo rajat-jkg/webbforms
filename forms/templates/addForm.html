@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+
+
+{%block head%}
+{%endblock%}
+
+{%block body%}
+
+<div class="content-container">  
+<div class="formcontainer">
+    <h3>Enter a name for the form you want to create</h3>
+    <form method="post">
+        {%csrf_token%}
+        <input type="text" name="formName" placeholder="Enter form name">
+        <button class="btn btn btn-dark btn-outline-light border-dark rounded" type="submit">Submit</button>
+    </form>
+</div>
+</div>
+{%endblock%}

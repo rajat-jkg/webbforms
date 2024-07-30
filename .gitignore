@@ -1,0 +1,12 @@
+account/__pycache__/
+account/migrations/__pycache__/
+docs/__pycache__/
+docs/migrations/__pycache__/
+forms/__pycache__
+forms/migrations/__pycache__
+home/__pycache__/
+home/migrations/__pycache__/
+webbForms/__pycache__/
+webbForms/migrations/__pycache__/
+db.sqlite3
+embedtest.html

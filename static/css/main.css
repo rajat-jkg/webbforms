@@ -1,0 +1,95 @@
+/* body containment */
+@media screen and (max-width: 576px) {
+    .content-container {
+        width: 95%;
+        margin: 20% auto;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .content-container {
+        width: 90%;
+        margin: 4% auto;
+    }
+}
+
+section{
+    min-height: 80vh;
+}
+
+
+/* login, signup and profile forms' style */
+.formcontainer {
+    width: 95%;
+    max-width: 450px;
+    margin: 20px auto 20px auto;
+}
+
+.formcontainer form input {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.emailInput,
+.nameInput {
+    margin: 5px 0;
+}
+
+form .nameInput {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1%;
+}
+
+form label {
+    display: block;
+}
+
+form input {
+    width: 100%;
+}
+
+
+/* homepage styles */
+@media screen and (min-width: 576px) {
+    h1 {
+        font-size: 65px;
+    }
+
+    h2{
+        font-size: 40px;
+    }
+}
+@media screen and (max-width: 576px) {
+    h1 {
+        font-size: 40px;
+    }
+    h2{
+        font-size: 30px;
+    }
+}
+.applications-section h2{
+    text-align: center;
+}
+.applications-section div .uses-text{
+    text-align: center;
+}
+.uses-image{
+    width: 95%;
+    margin: auto;
+}
+@media screen and (min-width: 768px){
+    .web-features .aligner{
+        text-align: right;
+    } 
+}
+@media screen and (max-width: 768px){
+    .web-features .aligner{
+        text-align: left;
+    } 
+}
+
+
+.stat-element{
+    box-shadow: 0 0 5px 1px #8c8c8c89;
+}

@@ -1,0 +1,90 @@
+{%extends 'base.html'%}
+
+{%block head%}
+<title>{{user.username}} </title>
+
+<script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+{%endblock%}
+
+
+{% block body %}
+
+<div class=" bg-dark text-light border border-secondary">
+    <div class="content-container">
+        <h3>User Profile</h3>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 my-2">
+                <h4>{{user.username}}</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 my-2"><a href="{%url 'editprofile'%}"><button
+                    class="btn btn-outline-light btn-sm">Edit Profile</button></div></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 my-2"> {% if user.first_name %} {{user.first_name}} {{user.last_name}}
+                {%else%} <span class="text-danger">Add a name to your profile</span> {%endif%} </div>
+            <div class="col-lg-4 col-md-6 my-2"> {% if user.email %} {{user.email}} {%else%} <span
+                    class="text-danger">Add an email to your profile</span> {%endif%}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 my-2">
+                <div class="stat-element bg-light text-dark p-2 rounded">{{formNumber}} forms</div>
+            </div>
+            <div class="col-lg-4 col-md-6 my-2">
+                <div class="stat-element bg-light text-dark p-2 rounded">{{responses}} responses</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="border border-secondary">
+    <div class="content-container">
+        <h3>Your Forms</h3>
+        <div class="row my-4">
+            {%for form , responseNum in forms%}
+            <div class="col-lg-4 col-md-6" id="formBlock{{form.id}}">
+            <div class="bg-dark text-light rounded p-3">
+                <h4>{{form.form_name}} </h4>  
+                <p> {{responseNum}} </p>
+                <a href="/forms/webbform/{{form.id}}"><button class="btn btn-outline-light btn-sm my-1"> View Form </button></a>
+                <a href="/forms/editform/{{form.id}}"><button class="btn btn-outline-light btn-sm my-1"> Edit</button></a>
+                <a href="/forms/responses/{{form.id}}"><button class="btn btn-outline-light btn-sm my-1"> Entries </button></a>
+                <button class="btn btn-outline-light btn-sm my-1" onclick="embedform({{form.id}})"> Embed </button>
+                <button class="btn btn-outline-danger btn-sm my-1" hx-get="/forms/delete/{{form.id}}" hx-target="#formBlock{{form.id}}" hx-swap="delete" hx-confirm="Are you sure you want to delete {{form.form_name}}">Delete</button>
+
+            </div>
+            </div>
+
+            {%empty%}
+            <p>No forms created yet</p>
+            {%endfor%}
+        </div>
+        <div style="text-align: center;"><a href="/forms/addnew"><button class="btn btn-outline-dark">Create a form</button> </a></div>
+    </div>
+</div>
+
+
+<script>
+    function embedform(id){
+        var embedcode = `<div>
+<iframe src="http://127.0.0.1:8000/forms/webbform/${id}" frameborder="0" style="width: 100%;" id="form${id}"></iframe>
+<script type='text/javascript'>
+    //script to automatically resize height of Iframe
+    var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+    
+    eventer(messageEvent,function(e) {
+      // If the message is a resize frame request
+      if (e.data.indexOf('resize::') != -1) {
+        var height = e.data.replace('resize::', '');
+        document.getElementById('form${id}').style.height = height+'px';
+      }
+    } ,false);        `
+    
+
+    embedcode += '<' + '/' + 'script'+ '>\n' + '</' + 'div>' ;
+        navigator.clipboard.writeText(embedcode);
+        alert("Form embed code copied to clipboard");
+}
+</script>
+{%endblock%}
